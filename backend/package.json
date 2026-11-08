@@ -1,0 +1,9 @@
+{
+  "name": "l5-backend",
+  "version": "1.0.0",
+  "description": "Backend simple con endpoint /health que consulta PostgreSQL",
+  "main": "server.js",
+  "dependencies": {
+    "pg": "^8.11.3"
+  }
+}
