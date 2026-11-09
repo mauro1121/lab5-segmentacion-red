@@ -1,0 +1,46 @@
+# ============================================================
+# DESPUÉS - Segmentado: tres redes = tres zonas
+#   gateway (pública)    -> public_net, app_net
+#   backend (aplicación) -> app_net, data_net
+#   db (datos)           -> data_net  (sin "ports")
+# ============================================================
+name: l5-despues
+
+services:
+  gateway:
+    build: ../gateway
+    ports:
+      - "80:80"                      # único puerto publicado al host
+    networks:
+      - public_net
+      - app_net
+    depends_on:
+      - backend
+
+  backend:
+    build: ../backend
+    networks:
+      - app_net
+      - data_net                     # único servicio con acceso a la db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=app
+      - DB_PASSWORD=app_secret
+      - DB_NAME=appdb
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    networks:
+      - data_net                     # SOLO zona de datos, sin "ports"
+    environment:
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=app_secret
+      - POSTGRES_DB=appdb
+
+networks:
+  public_net: {}
+  app_net:  { internal: true }       # sin salida a Internet
+  data_net: { internal: true }       # sin salida a Internet

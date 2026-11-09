@@ -1,5 +1,5 @@
-// Backend mínimo: expone /health y verifica la conexión a la base de datos.
-// Usa solo módulos nativos de Node (http) + el driver pg.
+// Backend (zona de aplicación): GET /health consulta PostgreSQL.
+// Devuelve {"status":"ok","db":"up",...} si la db responde.
 const http = require("http");
 const { Client } = require("pg");
 
@@ -16,20 +16,20 @@ const dbConfig = {
 async function checkDb() {
   const client = new Client(dbConfig);
   await client.connect();
-  const res = await client.query("SELECT 1 AS ok");
+  const res = await client.query("SELECT now() AS ts");
   await client.end();
-  return res.rows[0].ok === 1;
+  return res.rows[0].ts;
 }
 
 const server = http.createServer(async (req, res) => {
   if (req.url === "/health") {
     try {
-      await checkDb();
+      const ts = await checkDb();
       res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ status: "ok", db: "reachable" }));
+      res.end(JSON.stringify({ status: "ok", db: "up", host: dbConfig.host, ts }));
     } catch (err) {
       res.writeHead(503, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ status: "error", db: "unreachable", detail: err.message }));
+      res.end(JSON.stringify({ status: "error", db: "down", detail: err.message }));
     }
     return;
   }
@@ -37,6 +37,4 @@ const server = http.createServer(async (req, res) => {
   res.end(JSON.stringify({ service: "backend", endpoints: ["/health"] }));
 });
 
-server.listen(PORT, () => {
-  console.log(`backend escuchando en :${PORT}`);
-});
+server.listen(PORT, () => console.log(`backend escuchando en :${PORT}`));

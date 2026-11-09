@@ -1,0 +1,38 @@
+# ============================================================
+# ANTES - Sin segmentar: todo en la red por defecto.
+#   El gateway alcanza la db (prueba 4 CONECTA = problema)
+#   La db se publica en el host en 15432 (prueba 5 True = problema)
+#
+# Se usa 15432 en el host para evitar chocar con un PostgreSQL
+# local que suele ocupar el 5432.
+# ============================================================
+name: l5-antes
+
+services:
+  gateway:
+    build: ../gateway
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    # Sin bloque networks -> red por defecto del compose
+
+  backend:
+    build: ../backend
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=app
+      - DB_PASSWORD=app_secret
+      - DB_NAME=appdb
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    ports:
+      - "15432:5432"                 # BD publicada en el host (problema)
+    environment:
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=app_secret
+      - POSTGRES_DB=appdb
