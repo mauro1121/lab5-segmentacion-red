@@ -1,161 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" font-family="Segoe UI, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="1360" height="860" viewBox="0 0 1360 860" font-family="Segoe UI, Arial, sans-serif">
   <defs>
-    <marker id="aGreen" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1b7f3b"/></marker>
-    <marker id="aBlue" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#2d77c9"/></marker>
-    <marker id="aRed" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#c0392b"/></marker>
-    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-opacity="0.22"/></filter>
+    <marker id="aGreen" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1b7f3b"/></marker>
+    <marker id="aBlue" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#2d77c9"/></marker>
+    <marker id="aRed" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#c0392b"/></marker>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.18"/></filter>
   </defs>
 
-  <rect x="0" y="0" width="1400" height="900" fill="#f7f9fc"/>
-  <text x="700" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#1b7f3b">Deployment View · Laboratorio 5 – Segmentación de red</text>
-  <text x="700" y="56" text-anchor="middle" font-size="13" fill="#5a6b7b">Patrón: aislamiento por zonas (trust boundaries) · Compose project l5-despues · Docker Engine + Compose v2 · escenario DESPUÉS (segmentado)</text>
+  <rect x="0" y="0" width="1360" height="860" fill="#f6f8fb"/>
+  <text x="680" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#1b7f3b">Deployment View · Laboratorio 5 – Segmentación de red</text>
+  <text x="680" y="58" text-anchor="middle" font-size="13" fill="#5a6b7b">Patrón: aislamiento por zonas (trust boundaries) · Compose project l5-despues · escenario DESPUÉS (segmentado)</text>
 
-  <!-- ===================== USER ZONE ===================== -->
-  <rect x="25" y="80" width="250" height="760" rx="10" fill="#eef3f9" stroke="#8aa0b6" stroke-width="1.5"/>
-  <text x="40" y="102" font-size="13" font-weight="700" fill="#44586c">USER ZONE</text>
-  <text x="40" y="120" font-size="11" fill="#7a8ba0">Internet / LAN (untrusted)</text>
+  <!-- ============ ZONE BANDS (columnas verticales, misma altura) ============ -->
+  <!-- x de las zonas:  USER 60-300 | public 330-610 | app 640-920 | data 950-1230 -->
+  <rect x="60"  y="90" width="240" height="560" rx="10" fill="#eef3f9" stroke="#8aa0b6" stroke-width="1.4"/>
+  <rect x="330" y="90" width="280" height="560" rx="10" fill="#eaf3ff" stroke="#2d77c9" stroke-width="1.8"/>
+  <rect x="640" y="90" width="280" height="560" rx="10" fill="#eafaf0" stroke="#1b7f3b" stroke-width="1.8"/>
+  <rect x="950" y="90" width="280" height="560" rx="10" fill="#fdecef" stroke="#c0392b" stroke-width="1.8"/>
 
-  <rect x="45" y="140" width="210" height="150" rx="8" fill="#ffffff" stroke="#2d77c9" stroke-width="1.4" filter="url(#sh)"/>
-  <text x="55" y="160" font-size="10" fill="#8a97a6">«device»</text>
-  <text x="55" y="176" font-size="12" font-weight="700" fill="#1f2d3d">Player PC / laptop</text>
-  <rect x="58" y="188" width="184" height="92" rx="6" fill="#f3f8ff" stroke="#9cc0ea"/>
-  <text x="66" y="205" font-size="9" fill="#8a97a6">«executionEnvironment»</text>
-  <text x="66" y="220" font-size="11" font-weight="600" fill="#1f2d3d">Web browser / curl</text>
-  <text x="66" y="236" font-size="9.5" fill="#5a6b7b">HTTP sobre TCP</text>
-  <text x="66" y="251" font-size="9.5" fill="#5a6b7b">curl localhost</text>
-  <text x="66" y="266" font-size="9.5" fill="#5a6b7b">curl localhost/api/health</text>
+  <!-- zone headers -->
+  <text x="180" y="114" text-anchor="middle" font-size="13" font-weight="700" fill="#44586c">USER ZONE</text>
+  <text x="180" y="131" text-anchor="middle" font-size="10" fill="#7a8ba0">Internet / LAN (untrusted)</text>
+  <text x="470" y="114" text-anchor="middle" font-size="13" font-weight="700" fill="#2d77c9">ZONA PÚBLICA</text>
+  <text x="470" y="131" text-anchor="middle" font-size="10" fill="#5a6b7b">public_net · bridge · única con puerto publicado</text>
+  <text x="780" y="114" text-anchor="middle" font-size="13" font-weight="700" fill="#1b7f3b">ZONA DE APLICACIÓN</text>
+  <text x="780" y="131" text-anchor="middle" font-size="10" fill="#5a6b7b">app_net · internal: true · sin salida a Internet</text>
+  <text x="1090" y="114" text-anchor="middle" font-size="13" font-weight="700" fill="#c0392b">ZONA DE DATOS</text>
+  <text x="1090" y="131" text-anchor="middle" font-size="10" fill="#5a6b7b">data_net · internal: true · aislada</text>
 
-  <!-- ===================== DOCKER HOST ===================== -->
-  <rect x="295" y="80" width="1080" height="700" rx="10" fill="#fbfcfe" stroke="#8aa0b6" stroke-width="1.5"/>
-  <text x="310" y="102" font-size="11" fill="#8a97a6">«device»</text>
-  <text x="360" y="102" font-size="13" font-weight="700" fill="#44586c">Docker host · Docker Engine + Docker Compose v2 · every service: restart: unless-stopped</text>
+  <!-- trust boundary crítico entre app y datos -->
+  <line x1="935" y1="90" x2="935" y2="650" stroke="#c0392b" stroke-width="2.5" stroke-dasharray="7 6"/>
 
-  <!-- NETWORK public_net -->
-  <rect x="315" y="120" width="300" height="520" rx="8" fill="#eaf3ff" stroke="#2d77c9" stroke-width="1.8"/>
-  <text x="330" y="140" font-size="12" font-weight="700" fill="#2d77c9">NETWORK: public_net</text>
-  <text x="330" y="156" font-size="10" fill="#5a6b7b">bridge · l5-despues_public_net</text>
-  <text x="330" y="170" font-size="10" fill="#5a6b7b">única red con puerto publicado (80)</text>
+  <!-- ============ NODES (todos en la MISMA fila central y = 230..330) ============ -->
+  <!-- Browser -->
+  <rect x="90" y="230" width="180" height="100" rx="8" fill="#ffffff" stroke="#2d77c9" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="100" y="248" font-size="9" fill="#8a97a6">«device» / «execEnv»</text>
+  <text x="100" y="266" font-size="13" font-weight="700" fill="#1f2d3d">Browser / curl</text>
+  <text x="100" y="284" font-size="9.5" fill="#5a6b7b">HTTP sobre TCP</text>
+  <text x="100" y="300" font-size="9.5" fill="#5a6b7b">curl localhost</text>
+  <text x="100" y="316" font-size="9.5" fill="#5a6b7b">curl localhost/api/health</text>
 
-  <!-- NETWORK app_net -->
-  <rect x="630" y="120" width="300" height="520" rx="8" fill="#eafaf0" stroke="#1b7f3b" stroke-width="1.8"/>
-  <text x="645" y="140" font-size="12" font-weight="700" fill="#1b7f3b">NETWORK: app_net</text>
-  <text x="645" y="156" font-size="10" fill="#5a6b7b">bridge · internal: true</text>
-  <text x="645" y="170" font-size="10" fill="#5a6b7b">sin salida a Internet, sin puertos</text>
+  <!-- host port 80 (cuadrito amarillo en el borde de la zona pública) -->
+  <rect x="319" y="268" width="22" height="22" fill="#ffd54a" stroke="#b8860b"/>
+  <text x="330" y="284" text-anchor="middle" font-size="11" font-weight="700" fill="#7a5c00">80</text>
 
-  <!-- NETWORK data_net -->
-  <rect x="945" y="120" width="300" height="520" rx="8" fill="#fdecef" stroke="#c0392b" stroke-width="1.8"/>
-  <text x="960" y="140" font-size="12" font-weight="700" fill="#c0392b">NETWORK: data_net</text>
-  <text x="960" y="156" font-size="10" fill="#5a6b7b">bridge · internal: true</text>
-  <text x="960" y="170" font-size="10" fill="#5a6b7b">zona de datos aislada</text>
+  <!-- gateway (rojo) -->
+  <rect x="360" y="210" width="220" height="140" rx="8" fill="#ffffff" stroke="#c0392b" stroke-width="1.8" filter="url(#sh)"/>
+  <text x="372" y="228" font-size="9" fill="#8a97a6">«container»</text>
+  <text x="372" y="245" font-size="13" font-weight="700" fill="#1f2d3d">gateway</text>
+  <text x="372" y="262" font-size="9.5" fill="#5a6b7b">nginx:alpine · publica :80</text>
+  <text x="372" y="277" font-size="9.5" fill="#5a6b7b">curl + nc (para pruebas)</text>
+  <text x="372" y="292" font-size="9.5" fill="#5a6b7b">networks: public_net + app_net</text>
+  <rect x="372" y="302" width="196" height="40" rx="5" fill="#fff5f5" stroke="#e3a9a9"/>
+  <text x="380" y="317" font-size="8.5" fill="#8a97a6">«artifact» nginx.conf</text>
+  <text x="380" y="331" font-size="9" fill="#5a6b7b">/api/ → proxy_pass backend:3000</text>
 
-  <!-- trust boundary crítico -->
-  <line x1="937" y1="120" x2="937" y2="640" stroke="#c0392b" stroke-width="2.5" stroke-dasharray="7 6"/>
-  <text x="937" y="658" text-anchor="middle" font-size="10" fill="#c0392b" font-weight="600">trust boundary crítico (pública ↔ datos)</text>
+  <!-- backend (verde) -->
+  <rect x="670" y="210" width="220" height="140" rx="8" fill="#ffffff" stroke="#1b7f3b" stroke-width="1.8" filter="url(#sh)"/>
+  <text x="682" y="228" font-size="9" fill="#8a97a6">«container»</text>
+  <text x="682" y="245" font-size="13" font-weight="700" fill="#1f2d3d">backend</text>
+  <text x="682" y="262" font-size="9.5" fill="#5a6b7b">node:20-alpine · GET /health · :3000</text>
+  <text x="682" y="277" font-size="9.5" fill="#5a6b7b">único puente app ↔ datos</text>
+  <text x="682" y="292" font-size="9.5" fill="#5a6b7b">networks: app_net + data_net</text>
+  <rect x="682" y="302" width="196" height="40" rx="5" fill="#f3fbf6" stroke="#aedcc1"/>
+  <text x="690" y="317" font-size="8.5" fill="#8a97a6">«artifact» server.js (driver pg)</text>
+  <text x="690" y="331" font-size="9" fill="#5a6b7b">respuesta: {"status":"ok","db":"up"}</text>
 
-  <!-- Host port 80 -->
-  <rect x="300" y="300" width="22" height="22" fill="#ffd54a" stroke="#b8860b"/>
-  <text x="311" y="294" text-anchor="middle" font-size="10" font-weight="700" fill="#7a5c00">80</text>
+  <!-- db (verde) -->
+  <rect x="980" y="210" width="220" height="140" rx="8" fill="#ffffff" stroke="#1b7f3b" stroke-width="1.8" filter="url(#sh)"/>
+  <text x="992" y="228" font-size="9" fill="#8a97a6">«container»</text>
+  <text x="992" y="245" font-size="13" font-weight="700" fill="#1f2d3d">db</text>
+  <text x="992" y="262" font-size="9.5" fill="#5a6b7b">postgres:16-alpine · :5432</text>
+  <text x="992" y="277" font-size="9.5" fill="#5a6b7b">SIN "ports" (no publicada)</text>
+  <text x="992" y="292" font-size="9.5" fill="#5a6b7b">networks: data_net</text>
+  <rect x="992" y="302" width="196" height="40" rx="5" fill="#f3fbf6" stroke="#aedcc1"/>
+  <text x="1000" y="317" font-size="8.5" fill="#8a97a6">data store · DB appdb</text>
+  <text x="1000" y="331" font-size="9" fill="#5a6b7b">Docker DNS: db:5432</text>
 
-  <!-- gateway container (rojo = gateway) -->
-  <rect x="335" y="190" width="260" height="150" rx="8" fill="#ffffff" stroke="#c0392b" stroke-width="1.8" filter="url(#sh)"/>
-  <text x="345" y="208" font-size="10" fill="#8a97a6">«container»</text>
-  <text x="345" y="225" font-size="13" font-weight="700" fill="#1f2d3d">gateway</text>
-  <text x="345" y="242" font-size="9.5" fill="#5a6b7b">image nginx:alpine · build ./gateway</text>
-  <text x="345" y="256" font-size="9.5" fill="#5a6b7b">publica :80 · trae curl + nc (pruebas)</text>
-  <text x="345" y="270" font-size="9.5" fill="#5a6b7b">networks: public_net + app_net</text>
-  <rect x="345" y="280" width="240" height="50" rx="5" fill="#fff5f5" stroke="#e3a9a9"/>
-  <text x="353" y="296" font-size="9" fill="#8a97a6">«artifact» nginx.conf</text>
-  <text x="353" y="310" font-size="9.5" fill="#5a6b7b">/ → "gateway ok"</text>
-  <text x="353" y="323" font-size="9.5" fill="#5a6b7b">/api/ → proxy_pass backend:3000</text>
+  <!-- ============ CONNECTORS PERMITIDOS: líneas rectas horizontales en y=280 ============ -->
+  <!-- C1 browser -> port80 -> gateway -->
+  <line x1="270" y1="279" x2="360" y2="279" stroke="#2d77c9" stroke-width="2.2" marker-end="url(#aBlue)"/>
+  <text x="293" y="272" font-size="9.5" fill="#2d77c9" font-weight="700">C1 · HTTP :80</text>
 
-  <!-- backend container -->
-  <rect x="650" y="190" width="260" height="170" rx="8" fill="#ffffff" stroke="#1b7f3b" stroke-width="1.8" filter="url(#sh)"/>
-  <text x="660" y="208" font-size="10" fill="#8a97a6">«container»</text>
-  <text x="660" y="225" font-size="13" font-weight="700" fill="#1f2d3d">backend</text>
-  <text x="660" y="242" font-size="9.5" fill="#5a6b7b">build ./backend · node:20-alpine</text>
-  <text x="660" y="256" font-size="9.5" fill="#5a6b7b">GET /health · :3000 · trae curl + nc</text>
-  <text x="660" y="270" font-size="9.5" fill="#5a6b7b">networks: app_net + data_net</text>
-  <text x="660" y="284" font-size="9.5" fill="#5a6b7b">único puente entre app y datos</text>
-  <rect x="660" y="294" width="240" height="56" rx="5" fill="#f3fbf6" stroke="#aedcc1"/>
-  <text x="668" y="310" font-size="9" fill="#8a97a6">«artifact» server.js (driver pg)</text>
-  <text x="668" y="324" font-size="9.5" fill="#5a6b7b">/health → consulta "SELECT now()"</text>
-  <text x="668" y="337" font-size="9.5" fill="#5a6b7b">respuesta: {"status":"ok","db":"up"}</text>
+  <!-- C2 gateway -> backend -->
+  <line x1="580" y1="279" x2="670" y2="279" stroke="#1b7f3b" stroke-width="2.2" marker-end="url(#aGreen)"/>
+  <text x="588" y="272" font-size="9.5" fill="#1b7f3b" font-weight="700">C2 · /api/→:3000</text>
 
-  <!-- db container (verde = data) -->
-  <rect x="965" y="190" width="260" height="150" rx="8" fill="#ffffff" stroke="#1b7f3b" stroke-width="1.8" filter="url(#sh)"/>
-  <text x="975" y="208" font-size="10" fill="#8a97a6">«container»</text>
-  <text x="975" y="225" font-size="13" font-weight="700" fill="#1f2d3d">db</text>
-  <text x="975" y="242" font-size="9.5" fill="#5a6b7b">image postgres:16-alpine · :5432</text>
-  <text x="975" y="256" font-size="9.5" fill="#5a6b7b">SIN "ports" (no publicada al host)</text>
-  <text x="975" y="270" font-size="9.5" fill="#5a6b7b">networks: data_net</text>
-  <rect x="975" y="280" width="240" height="50" rx="5" fill="#f3fbf6" stroke="#aedcc1"/>
-  <text x="983" y="296" font-size="9" fill="#8a97a6">data store</text>
-  <text x="983" y="310" font-size="9.5" fill="#5a6b7b">DB appdb · user app</text>
-  <text x="983" y="323" font-size="9.5" fill="#5a6b7b">Docker DNS: db:5432</text>
+  <!-- C3 backend -> db -->
+  <line x1="890" y1="279" x2="980" y2="279" stroke="#1b7f3b" stroke-width="2.2" marker-end="url(#aGreen)"/>
+  <text x="905" y="272" font-size="9.5" fill="#1b7f3b" font-weight="700">C3 · :5432</text>
 
-  <!-- Execution environment Docker Engine -->
-  <rect x="335" y="400" width="260" height="90" rx="8" fill="#ffffff" stroke="#8aa0b6" stroke-width="1.4" filter="url(#sh)"/>
-  <text x="345" y="418" font-size="10" fill="#8a97a6">«executionEnvironment»</text>
-  <text x="345" y="434" font-size="12" font-weight="700" fill="#1f2d3d">Docker Engine (dockerd)</text>
-  <text x="345" y="450" font-size="9.5" fill="#5a6b7b">depends_on · DNS por nombre de servicio</text>
-  <text x="345" y="464" font-size="9.5" fill="#5a6b7b">«deployment spec» despues/docker-compose.yml</text>
-  <text x="345" y="478" font-size="9.5" fill="#5a6b7b">3 servicios · 3 redes</text>
+  <!-- ============ CONNECTORS BLOQUEADOS: ortogonales por canales dedicados debajo ============ -->
+  <!-- C4 gateway -> db : baja de gateway (x=470) a canal y=420, va recto a x=1090, sube a db -->
+  <polyline points="470,350 470,420 1090,420 1090,350" fill="none" stroke="#c0392b" stroke-width="2.2" stroke-dasharray="8 5" marker-end="url(#aRed)"/>
+  <circle cx="935" cy="420" r="9" fill="#fdecef" stroke="#c0392b" stroke-width="2"/>
+  <line x1="929" y1="414" x2="941" y2="426" stroke="#c0392b" stroke-width="2"/>
+  <line x1="941" y1="414" x2="929" y2="426" stroke="#c0392b" stroke-width="2"/>
+  <rect x="560" y="404" width="240" height="32" rx="5" fill="#ffffff" stroke="#e3a9a9"/>
+  <text x="680" y="416" text-anchor="middle" font-size="9.5" fill="#c0392b" font-weight="700">C4 · gateway → db · nc -zv 5432</text>
+  <text x="680" y="429" text-anchor="middle" font-size="8.5" fill="#c0392b">BLOQUEADO — "Try again" / por IP: timed out</text>
 
-  <!-- ===================== CONNECTORS ===================== -->
-  <!-- C1 exterior -> gateway :80 -->
-  <line x1="255" y1="235" x2="333" y2="250" stroke="#2d77c9" stroke-width="2" marker-end="url(#aBlue)"/>
-  <text x="258" y="226" font-size="9" fill="#2d77c9" font-weight="600">C1 HTTP :80</text>
+  <!-- C5 exterior -> db:15432 : baja de browser (x=180) a canal y=490, va recto a x=1090, sube a db -->
+  <polyline points="180,330 180,490 1090,490 1090,436" fill="none" stroke="#c0392b" stroke-width="2.2" stroke-dasharray="8 5" marker-end="url(#aRed)"/>
+  <circle cx="935" cy="490" r="9" fill="#fdecef" stroke="#c0392b" stroke-width="2"/>
+  <line x1="929" y1="484" x2="941" y2="496" stroke="#c0392b" stroke-width="2"/>
+  <line x1="941" y1="484" x2="929" y2="496" stroke="#c0392b" stroke-width="2"/>
+  <rect x="540" y="474" width="260" height="32" rx="5" fill="#ffffff" stroke="#e3a9a9"/>
+  <text x="670" y="486" text-anchor="middle" font-size="9.5" fill="#c0392b" font-weight="700">C5 · Exterior → db :15432</text>
+  <text x="670" y="499" text-anchor="middle" font-size="8.5" fill="#c0392b">BLOQUEADO — la db no publica puertos al host</text>
 
-  <!-- C2 gateway -> backend /api/ -->
-  <line x1="595" y1="255" x2="648" y2="255" stroke="#1b7f3b" stroke-width="2" marker-end="url(#aGreen)"/>
-  <text x="598" y="246" font-size="9" fill="#1b7f3b" font-weight="600">C2 /api/→:3000</text>
+  <text x="935" y="640" text-anchor="middle" font-size="10" fill="#c0392b" font-weight="600">trust boundary crítico (pública ↔ datos)</text>
 
-  <!-- C3 backend -> db :5432 -->
-  <line x1="910" y1="255" x2="963" y2="255" stroke="#1b7f3b" stroke-width="2" marker-end="url(#aGreen)"/>
-  <text x="900" y="246" font-size="9" fill="#1b7f3b" font-weight="600">C3 :5432</text>
+  <!-- ============ KEY ============ -->
+  <rect x="60" y="672" width="520" height="160" rx="8" fill="#ffffff" stroke="#cfd8e3"/>
+  <text x="76" y="694" font-size="12" font-weight="700" fill="#1f2d3d">KEY (notación)</text>
+  <rect x="76" y="706" width="16" height="13" fill="#ffffff" stroke="#c0392b" stroke-width="1.6"/>
+  <text x="100" y="717" font-size="9.5" fill="#5a6b7b">«container» rojo = gateway (zona pública)</text>
+  <rect x="76" y="726" width="16" height="13" fill="#ffffff" stroke="#1b7f3b" stroke-width="1.6"/>
+  <text x="100" y="737" font-size="9.5" fill="#5a6b7b">«container» verde = aplicación / datos</text>
+  <rect x="76" y="746" width="16" height="13" fill="#ffd54a" stroke="#b8860b"/>
+  <text x="100" y="757" font-size="9.5" fill="#5a6b7b">puerto publicado al host (solo :80)</text>
+  <rect x="76" y="766" width="16" height="13" fill="#eaf3ff" stroke="#2d77c9"/>
+  <text x="100" y="777" font-size="9.5" fill="#5a6b7b">zona / red Docker = trust boundary</text>
+  <line x1="320" y1="712" x2="344" y2="712" stroke="#1b7f3b" stroke-width="2.4" marker-end="url(#aGreen)"/>
+  <text x="352" y="716" font-size="9.5" fill="#5a6b7b">flujo permitido (la app funciona)</text>
+  <line x1="320" y1="732" x2="344" y2="732" stroke="#c0392b" stroke-width="2.4" stroke-dasharray="6 4" marker-end="url(#aRed)"/>
+  <text x="352" y="736" font-size="9.5" fill="#5a6b7b">flujo bloqueado (ataque detenido)</text>
+  <circle cx="330" cy="754" r="7" fill="#fdecef" stroke="#c0392b" stroke-width="1.6"/>
+  <line x1="325" y1="749" x2="335" y2="759" stroke="#c0392b" stroke-width="1.6"/>
+  <line x1="335" y1="749" x2="325" y2="759" stroke="#c0392b" stroke-width="1.6"/>
+  <text x="352" y="758" font-size="9.5" fill="#5a6b7b">punto donde se corta la conexión</text>
+  <text x="76" y="800" font-size="8.5" fill="#8a97a6">Dirección de la flecha = quién abre la conexión (cliente → servidor).</text>
+  <text x="76" y="814" font-size="8.5" fill="#8a97a6">Etiqueta del conector = ID · protocolo · puerto · propósito.</text>
+  <text x="76" y="828" font-size="8.5" fill="#8a97a6">Solo el puerto 80 se publica al host; el resto vive en las redes internas.</text>
 
-  <!-- C4 gateway -> db BLOQUEADO -->
-  <path d="M 465 340 C 465 560, 1095 560, 1095 342" fill="none" stroke="#c0392b" stroke-width="2.2" stroke-dasharray="8 5" marker-end="url(#aRed)"/>
-  <text x="780" y="582" text-anchor="middle" font-size="11" fill="#c0392b" font-weight="700">C4 gateway → db  BLOQUEADO — DNS "Try again" · por IP: timed out (no comparten red)</text>
+  <!-- ============ CONNECTOR CATALOG ============ -->
+  <rect x="600" y="672" width="700" height="160" rx="8" fill="#ffffff" stroke="#cfd8e3"/>
+  <text x="616" y="694" font-size="12" font-weight="700" fill="#1f2d3d">CONNECTOR CATALOG</text>
+  <line x1="610" y1="702" x2="1290" y2="702" stroke="#e1e7ee"/>
+  <text x="616" y="716" font-size="8.5" font-weight="700" fill="#44586c">ID</text>
+  <text x="646" y="716" font-size="8.5" font-weight="700" fill="#44586c">Origen → Destino</text>
+  <text x="820" y="716" font-size="8.5" font-weight="700" fill="#44586c">Protocolo · Puerto</text>
+  <text x="1010" y="716" font-size="8.5" font-weight="700" fill="#44586c">Resultado (segmentado)</text>
 
-  <!-- C5 exterior -> db :15432 BLOQUEADO -->
-  <path d="M 150 290 C 150 700, 150 700, 1095 348" fill="none" stroke="#c0392b" stroke-width="2.2" stroke-dasharray="8 5" marker-end="url(#aRed)"/>
-  <text x="430" y="712" text-anchor="middle" font-size="11" fill="#c0392b" font-weight="700">C5 Exterior → db :15432  BLOQUEADO — la db no publica puertos al host</text>
-
-  <!-- ===================== KEY ===================== -->
-  <rect x="25" y="640" width="250" height="200" rx="8" fill="#ffffff" stroke="#cfd8e3"/>
-  <text x="40" y="662" font-size="12" font-weight="700" fill="#1f2d3d">KEY (notación)</text>
-  <rect x="40" y="674" width="18" height="14" fill="#ffffff" stroke="#c0392b" stroke-width="1.6"/>
-  <text x="66" y="685" font-size="9.5" fill="#5a6b7b">«container» rojo = gateway (zona pública)</text>
-  <rect x="40" y="694" width="18" height="14" fill="#ffffff" stroke="#1b7f3b" stroke-width="1.6"/>
-  <text x="66" y="705" font-size="9.5" fill="#5a6b7b">«container» verde = app / datos</text>
-  <rect x="40" y="714" width="18" height="14" fill="#eaf3ff" stroke="#2d77c9"/>
-  <text x="66" y="725" font-size="9.5" fill="#5a6b7b">zona / red Docker = trust boundary</text>
-  <rect x="40" y="734" width="18" height="14" fill="#ffd54a" stroke="#b8860b"/>
-  <text x="66" y="745" font-size="9.5" fill="#5a6b7b">puerto publicado al host (solo :80)</text>
-  <line x1="40" y1="760" x2="62" y2="760" stroke="#1b7f3b" stroke-width="2.5" marker-end="url(#aGreen)"/>
-  <text x="70" y="764" font-size="9.5" fill="#5a6b7b">flujo permitido (la app funciona)</text>
-  <line x1="40" y1="780" x2="62" y2="780" stroke="#c0392b" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#aRed)"/>
-  <text x="70" y="784" font-size="9.5" fill="#5a6b7b">flujo bloqueado (ataque detenido)</text>
-  <text x="40" y="806" font-size="9" fill="#8a97a6">Dirección flecha = quien abre la conexión</text>
-  <text x="40" y="820" font-size="9" fill="#8a97a6">(cliente → servidor).</text>
-  <text x="40" y="834" font-size="9" fill="#8a97a6">Etiqueta = ID · protocolo · puerto.</text>
-
-  <!-- ===================== CONNECTOR CATALOG ===================== -->
-  <rect x="295" y="790" width="1080" height="105" rx="8" fill="#ffffff" stroke="#cfd8e3"/>
-  <text x="305" y="808" font-size="12" font-weight="700" fill="#1f2d3d">CONNECTOR CATALOG (rutas de comunicación)</text>
-  <line x1="300" y1="814" x2="1370" y2="814" stroke="#e1e7ee"/>
-  <text x="305" y="828" font-size="9" font-weight="700" fill="#44586c">ID</text>
-  <text x="335" y="828" font-size="9" font-weight="700" fill="#44586c">Origen → Destino</text>
-  <text x="560" y="828" font-size="9" font-weight="700" fill="#44586c">Protocolo</text>
-  <text x="720" y="828" font-size="9" font-weight="700" fill="#44586c">Puerto</text>
-  <text x="800" y="828" font-size="9" font-weight="700" fill="#44586c">Propósito</text>
-  <text x="1150" y="828" font-size="9" font-weight="700" fill="#44586c">Resultado (segmentado)</text>
-
-  <text x="305" y="844" font-size="9" fill="#2d77c9" font-weight="700">C1</text><text x="335" y="844" font-size="9" fill="#5a6b7b">Exterior → gateway</text><text x="560" y="844" font-size="9" fill="#5a6b7b">HTTP/1.1 sobre TCP</text><text x="720" y="844" font-size="9" fill="#5a6b7b">host 80→80</text><text x="800" y="844" font-size="9" fill="#5a6b7b">curl localhost · curl /api/health (cadena completa)</text><text x="1150" y="844" font-size="9" fill="#1b7f3b">Responde</text>
-  <text x="305" y="858" font-size="9" fill="#1b7f3b" font-weight="700">C2</text><text x="335" y="858" font-size="9" fill="#5a6b7b">gateway → backend</text><text x="560" y="858" font-size="9" fill="#5a6b7b">HTTP/1.1 REST (proxy)</text><text x="720" y="858" font-size="9" fill="#5a6b7b">3000</text><text x="800" y="858" font-size="9" fill="#5a6b7b">/api/ → backend:3000 (GET /health)</text><text x="1150" y="858" font-size="9" fill="#1b7f3b">Responde {"status":"ok","db":"up"}</text>
-  <text x="305" y="872" font-size="9" fill="#1b7f3b" font-weight="700">C3</text><text x="335" y="872" font-size="9" fill="#5a6b7b">backend → db</text><text x="560" y="872" font-size="9" fill="#5a6b7b">SQL asyncpg/pg (v3)</text><text x="720" y="872" font-size="9" fill="#5a6b7b">5432</text><text x="800" y="872" font-size="9" fill="#5a6b7b">consulta a PostgreSQL (flujo legítimo)</text><text x="1150" y="872" font-size="9" fill="#1b7f3b">Conecta</text>
-  <text x="305" y="886" font-size="9" fill="#c0392b" font-weight="700">C4</text><text x="335" y="886" font-size="9" fill="#5a6b7b">gateway → db</text><text x="560" y="886" font-size="9" fill="#5a6b7b">TCP (nc -zv)</text><text x="720" y="886" font-size="9" fill="#5a6b7b">5432</text><text x="800" y="886" font-size="9" fill="#5a6b7b">intento de ataque directo a la db</text><text x="1150" y="886" font-size="9" fill="#c0392b" font-weight="700">FALLA (Try again / timed out)</text>
-  <text x="1270" y="886" font-size="9" fill="#c0392b" font-weight="700">C5 Exterior→db:15432 FALLA</text>
+  <line x1="610" y1="722" x2="1290" y2="722" stroke="#eef2f6"/>
+  <text x="616" y="738" font-size="9" fill="#2d77c9" font-weight="700">C1</text><text x="646" y="738" font-size="9" fill="#5a6b7b">Exterior → gateway</text><text x="820" y="738" font-size="9" fill="#5a6b7b">HTTP/1.1 · host 80→80</text><text x="1010" y="738" font-size="9" fill="#1b7f3b">Responde (gateway ok)</text>
+  <text x="616" y="756" font-size="9" fill="#1b7f3b" font-weight="700">C2</text><text x="646" y="756" font-size="9" fill="#5a6b7b">gateway → backend</text><text x="820" y="756" font-size="9" fill="#5a6b7b">HTTP/1.1 proxy · 3000</text><text x="1010" y="756" font-size="9" fill="#1b7f3b">{"status":"ok","db":"up"}</text>
+  <text x="616" y="774" font-size="9" fill="#1b7f3b" font-weight="700">C3</text><text x="646" y="774" font-size="9" fill="#5a6b7b">backend → db</text><text x="820" y="774" font-size="9" fill="#5a6b7b">SQL (pg) · 5432</text><text x="1010" y="774" font-size="9" fill="#1b7f3b">Conecta (flujo legítimo)</text>
+  <text x="616" y="792" font-size="9" fill="#c0392b" font-weight="700">C4</text><text x="646" y="792" font-size="9" fill="#5a6b7b">gateway → db</text><text x="820" y="792" font-size="9" fill="#5a6b7b">TCP (nc -zv) · 5432</text><text x="1010" y="792" font-size="9" fill="#c0392b" font-weight="700">FALLA (Try again / timed out)</text>
+  <text x="616" y="810" font-size="9" fill="#c0392b" font-weight="700">C5</text><text x="646" y="810" font-size="9" fill="#5a6b7b">Exterior → db</text><text x="820" y="810" font-size="9" fill="#5a6b7b">TCP · 15432</text><text x="1010" y="810" font-size="9" fill="#c0392b" font-weight="700">FALLA (sin puerto publicado)</text>
+  <text x="616" y="828" font-size="8" fill="#8a97a6">C1–C3 demuestran que la app funciona · C4 y C5 demuestran el patrón de segmentación</text>
 </svg>
